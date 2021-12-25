@@ -11,13 +11,25 @@ namespace HumanResourceManagement.Models
         public string Fullname { get; set; }
         public string Position { get; set; } // min 2 herf
         public double Salary { get; set; } // >= 250
+        public string DepartmentName { get; set; }
 
-        public Employee(string fullname, string position, string salary)
+        public Employee(string fullname, string position, double salary, string departmentName)
         {
+            Counter++;
+            Fullname = fullname;
+            Position = position;
+            Salary = salary;
+            DepartmentName = departmentName;
 
+            string Naming = departmentName.ToUpper().Substring(0, 2);
+
+            No += Naming + Counter;
         }
 
-
+        public override string ToString()
+        {
+            return $"Fullname: {Fullname}\nPosition: {Position}\nSalary: {Salary}\nDepartment: {DepartmentName}\nWorker number: {No}";
+        }
 
 
 
