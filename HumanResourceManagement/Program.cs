@@ -76,7 +76,8 @@ namespace HumanResourceManagement
             Console.WriteLine("Elave etmek istediyiniz iscinin ad ve soyadini daxil edin: ");
         reEnterFullname:
             string fullname = Console.ReadLine();
-            if (String.IsNullOrWhiteSpace(fullname))
+            string[] full = fullname.Split(' ');
+            if (String.IsNullOrWhiteSpace(fullname) || full.Length < 2 || full[0].Length < 3 || full[1].Length < 5)
             {
                 Console.WriteLine("Ad ve soyadi duzgun daxil edin...");
                 goto reEnterFullname;
@@ -116,7 +117,7 @@ namespace HumanResourceManagement
         static void AddDepartment(ref HumanResourceManager hrManager)
         {
             Console.WriteLine("Departament adini daxil edin: ");
-            reEnterDepartmentName:
+        reEnterDepartmentName:
             string departmentname = Console.ReadLine();
             if (String.IsNullOrWhiteSpace(departmentname))
             {
@@ -124,7 +125,7 @@ namespace HumanResourceManagement
                 goto reEnterDepartmentName;
             }
 
-            Console.WriteLine("Departamentde maximum var ola bilecek isci sayini daxil edin: ");
+            Console.WriteLine("\nDepartamentde maximum var ola bilecek isci sayini daxil edin: ");
         checkWorkerLimit:
             string workers = Console.ReadLine();
             int workersNum = 0;
@@ -134,7 +135,7 @@ namespace HumanResourceManagement
                 goto checkWorkerLimit;
             }
 
-            Console.WriteLine("Departamentde butun iscilere verilecek ayliq cemi meblegi daxil edin: ");
+            Console.WriteLine("\nDepartamentde butun iscilere verilecek ayliq cemi meblegi daxil edin: ");
         checkSalaryLimit:
             string salary = Console.ReadLine();
             double salaryNum = 0;
@@ -144,7 +145,7 @@ namespace HumanResourceManagement
                 goto checkSalaryLimit;
             }
 
-            hrManager.AddDepartment(hrManager.Employees,departmentname,workersNum,salaryNum);
+            hrManager.AddDepartment(departmentname, workersNum, salaryNum);
         }
 
         static void GetDepartmentsList(ref HumanResourceManager hrManager)
@@ -175,8 +176,15 @@ namespace HumanResourceManagement
 
         static void RemoveEmployee(ref HumanResourceManager hrManager)
         {
-
+            Employee[] Employees = null;
+            Employee[] newEmployees = new Employee[0];
+            int counter = 0;
+            foreach (Employee item in Employees)
+            {
+                Array.Resize(ref newEmployees, newEmployees.Length + 1);
+                newEmployees[counter++] = item;
+            }
+            Employees = newEmployees;
         }
-
     }
 }

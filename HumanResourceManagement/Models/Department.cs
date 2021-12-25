@@ -9,7 +9,7 @@ namespace HumanResourceManagement.Models
         public string Name { get; set; } // min 2 herf
         public int WorkerLimit { get; set; } // min 1 nefer
         public double SalaryLimit { get; set; } // >= 250
-        public Employee[] Employees { get; set; }
+        private Employee[] Employees;
         public double CalcSalaryAverage(Department department)
         {
             double total = 0;
@@ -23,13 +23,11 @@ namespace HumanResourceManagement.Models
             return total / count;
         }
 
-        public Department(Employee[] employees, string name, int workerLimit, double salaryLimit)
+        public Department(string name, int workerLimit, double salaryLimit)
         {
-            Employees = employees;
             Name = name;
             WorkerLimit = workerLimit;
             SalaryLimit = salaryLimit;
         }
-
     }
 }
