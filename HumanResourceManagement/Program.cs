@@ -1,6 +1,5 @@
 ﻿using HumanResourceManagement.Models;
 using HumanResourceManagement.Services;
-using HumanResourceManagement.Interfaces;
 using System;
 
 namespace HumanResourceManagement
@@ -25,11 +24,11 @@ namespace HumanResourceManagement
                 Console.WriteLine("\t8 - Departamentdeki iscini sil");
                 Console.Write("\n\tDaxil Et: ");
 
-                string enteredNum = Console.ReadLine();
-                int checkNum;
-                int.TryParse(enteredNum, out checkNum);
+                string enter = Console.ReadLine();
+                int checkEnter;
+                int.TryParse(enter, out checkEnter);
 
-                switch (checkNum)
+                switch (checkEnter)
                 {
                     case 1:
                         Console.Clear();
@@ -72,52 +71,58 @@ namespace HumanResourceManagement
 
         }
 
-        private static void AddEmployee(ref HumanResourceManager hrManager)
+        static void AddEmployee(ref HumanResourceManager hrManager)
         {
             Console.WriteLine("Elave etmek istediyiniz iscinin ad ve soyadini daxil edin: ");
-        reenterfullname:
+        reEnterFullname:
             string fullname = Console.ReadLine();
             if (String.IsNullOrWhiteSpace(fullname))
             {
                 Console.WriteLine("Ad ve soyadi duzgun daxil edin...");
-                goto reenterfullname;
+                goto reEnterFullname;
             }
 
             Console.WriteLine("\nIscinin vezifesini daxil edin: ");
-        reenterpositionname:
-            string posName = Console.ReadLine();
-            if (String.IsNullOrWhiteSpace(posName))
+        reEnterPositionName:
+            string positionName = Console.ReadLine();
+            if (String.IsNullOrWhiteSpace(positionName))
             {
                 Console.WriteLine("Vezife adini duzgun qeyd edin...");
-                goto reenterpositionname;
+                goto reEnterPositionName;
             }
 
             Console.WriteLine("\nElave etmek istediyiniz iscinin ayliq maasini daxil edin: ");
-        checkSalary:
-            string workersalary = Console.ReadLine();
-            double workersalaryNum = 0;
-            while (!double.TryParse(workersalary, out workersalaryNum) || workersalaryNum < 250)
+        reEnterSalary:
+            string salary = Console.ReadLine();
+            double checkSalary = 0;
+            while (!double.TryParse(salary, out checkSalary) || checkSalary < 250)
             {
                 Console.WriteLine("Meblegi duzgun daxil edin...");
-                goto checkSalary;
+                goto reEnterSalary;
             }
 
             Console.WriteLine("\nIscini elave etmek istediyiniz departament adini daxil edin: ");
-        reenterdname:
+        reEnterDepartmentName:
+            string departmentName = Console.ReadLine();
+            if (String.IsNullOrWhiteSpace(departmentName))
+            {
+                Console.WriteLine("Ad ve soyadi duzgun daxil edin...");
+                goto reEnterDepartmentName;
+            }
+
+            hrManager.AddEmployee(fullname, positionName, checkSalary, departmentName);
+        }
+
+        static void AddDepartment(ref HumanResourceManager hrManager)
+        {
+            Console.WriteLine("Departament adini daxil edin: ");
+            reEnterDepartmentName:
             string departmentname = Console.ReadLine();
             if (String.IsNullOrWhiteSpace(departmentname))
             {
-                Console.WriteLine("Ad ve soyadi duzgun daxil edin...");
-                goto reenterdname;
+                Console.WriteLine("Departament adini duzgun daxil edin...");
+                goto reEnterDepartmentName;
             }
-
-            hrManager.AddEmployee(fullname, posName, workersalaryNum, departmentname);
-        }
-
-        private static void AddDepartment(ref HumanResourceManager hrManager)
-        {
-            Console.WriteLine("Departament adini daxil edin: ");
-            string departmentname = Console.ReadLine();
 
             Console.WriteLine("Departamentde maximum var ola bilecek isci sayini daxil edin: ");
         checkWorkerLimit:
@@ -139,14 +144,14 @@ namespace HumanResourceManagement
                 goto checkSalaryLimit;
             }
 
-            hrManager.AddDepartment(departmentname,workersNum,salary);
+            hrManager.AddDepartment(hrManager.Employees,departmentname,workersNum,salaryNum);
         }
 
         static void GetDepartmentsList(ref HumanResourceManager hrManager)
         {
             if (hrManager.Departments.Length > 0)
             {
-                foreach (Department item in hrManager.Departments)
+                foreach (var item in hrManager.Departments)
                 {
                     Console.WriteLine($"{item}");
                 }

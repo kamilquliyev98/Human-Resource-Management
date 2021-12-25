@@ -10,7 +10,7 @@ namespace HumanResourceManagement.Interfaces
         Employee[] Employees { get; }
         Department[] Departments { get; }
 
-        Department[] GetDepartmentList(Department[] departments);
+        //Department[] GetDepartmentList(Department[] departments); // sil
         void AddDepartment(Employee[] employees, string name, int workerLimit, double salaryLimit);
         void EditDepartment(string name, string newName);
         //Employee[] GetEmployeeList();

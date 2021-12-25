@@ -20,10 +20,10 @@ namespace HumanResourceManagement.Services
             _departments = new Department[0];
         }
 
-        public Department[] GetDepartmentList(Department[] departments)
-        {
-            throw new NotImplementedException();
-        }
+        //public Department[] GetDepartmentList(Department[] departments)
+        //{
+        //    throw new NotImplementedException();
+        //} // sil
 
         public void AddDepartment(Employee[] employees, string name, int workerLimit, double salaryLimit)
         {
@@ -55,11 +55,6 @@ namespace HumanResourceManagement.Services
         }
 
         public void RemoveEmployee(string no, string departmentName)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void AddDepartment(string departmentname, int workersNum, string salary)
         {
             throw new NotImplementedException();
         }
