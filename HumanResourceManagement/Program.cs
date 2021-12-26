@@ -337,27 +337,6 @@ namespace HumanResourceManagement
                     Console.WriteLine("Daxil etdiyiniz nomrede isci movcud deyil.\n");
                     return;
                 }
-            
-
-
-
-                //if (item.No.ToLower() == workerNo.ToLower())
-                //{
-                //    Console.WriteLine("Secdiyiniz iscinin adini hansi ada deyismek isteyirsiniz? Daxil edin: ");
-                //reEnterNewName:
-                //    string newName = Console.ReadLine(); // neye deyisecek
-
-                    //    if (String.IsNullOrWhiteSpace(newName))
-                    //    {
-                    //        Console.WriteLine("Duzgun daxil edin:");
-                    //        goto reEnterNewName;
-                    //    }
-
-                    //    item.Name = newName;
-                    //    break;
-                    //}
-                    //Console.WriteLine("Daxil etdiyiniz adda departament movcud deyil. Duzgun daxil edin: ");
-                    //goto reEnterNameNow;
             }
         }
 
