@@ -32,11 +32,11 @@ namespace HumanResourceManagement
                 {
                     case 1:
                         Console.Clear();
-                        GetDepartmentsList(ref hrManager);
+                        GetDepartmentsList(ref hrManager); // hazir
                         break;
                     case 2:
                         Console.Clear();
-                        AddDepartment(ref hrManager);
+                        AddDepartment(ref hrManager); // hazir
                         break;
                     case 3:
                         Console.Clear();
@@ -44,7 +44,7 @@ namespace HumanResourceManagement
                         break;
                     case 4:
                         Console.Clear();
-                        GetEmployeeList(ref hrManager);
+                        GetEmployeeList(ref hrManager); // hazir
                         break;
                     case 5:
                         Console.Clear();
@@ -52,7 +52,7 @@ namespace HumanResourceManagement
                         break;
                     case 6:
                         Console.Clear();
-                        AddEmployee(ref hrManager);
+                        AddEmployee(ref hrManager); // hazir
                         break;
                     case 7:
                         Console.Clear();
@@ -160,7 +160,7 @@ namespace HumanResourceManagement
             else
             {
                 Console.Clear();
-                Console.WriteLine("Isci movcud deyil. Ilk once isci elave edin.");
+                Console.WriteLine("Isci movcud deyil. Ilk once isci elave edin.\n");
             }
         }
 
@@ -181,13 +181,60 @@ namespace HumanResourceManagement
             else
             {
                 Console.Clear();
-                Console.WriteLine("Departament movcud deyil. Departament daxil edin.");
+                Console.WriteLine("Departament movcud deyil. Departament daxil edin.\n");
             }
         }
 
         static void EditDepartment(ref HumanResourceManager hrManager)
         {
+            if (hrManager.Departments.Length <= 0)
+            {
+                Console.WriteLine("Hec bir departament movcud deyil...\n");
+                return;
+            }
 
+            Console.WriteLine("Departamentlerin siyahisi:");
+            Console.WriteLine("------------------------------");
+            foreach (Department item in hrManager.Departments)
+            {
+                Console.WriteLine($"{item}------------------------------");
+            }
+
+            Console.WriteLine("\nDeyisiklik etmek istediyiniz departamentin adini daxil edin: ");
+        reEnterNameNow:
+            string nameNow = Console.ReadLine();  // deyismek istediyi ad
+            if (String.IsNullOrWhiteSpace(nameNow))
+            {
+                Console.WriteLine("Duzgun daxil edin:");
+                goto reEnterNameNow;
+            }
+
+            foreach (Department item in hrManager.Departments)
+            {
+                if (item.Name.ToLower() == nameNow.ToLower())
+                {
+                    Console.WriteLine("Secdiyiniz departament adini hansi ada deyismek isteyirsiniz? Daxil edin: ");
+                reEnterNewName:
+                    string newName = Console.ReadLine(); // neye deyisecek
+
+                    if (String.IsNullOrWhiteSpace(newName))
+                    {
+                        Console.WriteLine("Duzgun daxil edin:");
+                        goto reEnterNewName;
+                    }
+
+                    if (nameNow.ToLower() == newName.ToLower())
+                    {
+                        Console.WriteLine("Deyisdirmek istediyiniz ad cari adla eyni ola bilmez...\nDuzgun daxil edin:");
+                        goto reEnterNewName;
+                    }
+
+                    item.Name = newName;
+                    break;
+                }
+                Console.WriteLine("Daxil etdiyiniz adda departament movcud deyil. Duzgun daxil edin: ");
+                goto reEnterNameNow;
+            }
         }
 
         static void EditEmployee(ref HumanResourceManager hrManager)
