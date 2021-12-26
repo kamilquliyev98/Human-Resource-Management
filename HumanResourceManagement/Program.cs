@@ -259,7 +259,106 @@ namespace HumanResourceManagement
 
         static void EditEmployee(ref HumanResourceManager hrManager)
         {
+            if (hrManager.Employees.Length <= 0)
+            {
+                Console.WriteLine("Hec bir isci movcud deyil...\n");
+                return;
+            }
 
+            Console.WriteLine("Iscilerin siyahisi:");
+            Console.WriteLine("------------------------------");
+            foreach (Employee item in hrManager.Employees)
+            {
+                Console.WriteLine($"{item}\n------------------------------");
+            }
+
+            Console.WriteLine("\nDeyisiklik etmek istediyiniz iscinin nomresini daxil edin: ");
+        reEnterWorkerNo:
+            string workerNo = Console.ReadLine();  // deyismek istediyiniz iscinin nomresi
+            if (String.IsNullOrWhiteSpace(workerNo))
+            {
+                Console.WriteLine("Duzgun daxil edin:");
+                goto reEnterWorkerNo;
+            }
+
+            foreach (Employee item in hrManager.Employees)
+            {
+                if (item.No.ToLower() == workerNo.ToLower())
+                {
+                    Console.WriteLine("Etmek istediyiniz emeliyyatin qarsisindaki nomreni daxil edin:\n");
+                    Console.WriteLine("\t1 - Iscinin aldigi maasda duzelis etmek");
+                    Console.WriteLine("\t2 - Iscinin vezifesinde duzelis etmek");
+
+                    reEnterEditWorker:
+                    string editWorker = Console.ReadLine();
+                    int editWorkerNum = 0;
+                    if (!int.TryParse(editWorker, out editWorkerNum))
+                    {
+                        Console.WriteLine("Duzgun daxil edin...");
+                        goto reEnterEditWorker;
+                    }
+
+                    switch (editWorkerNum)
+                    {
+                        case 1:
+                            Console.WriteLine("Iscinin yeni maasini daxil edin: ");
+
+                        reEnternewSalary:
+                            string newSalary = Console.ReadLine();
+                            int newSalaryNum = 0;
+                            if (!int.TryParse(newSalary, out newSalaryNum))
+                            {
+                                Console.WriteLine("Duzgun daxil edin...");
+                                goto reEnternewSalary;
+                            }
+
+                            item.Salary = newSalaryNum;
+                            Console.WriteLine("Maasda duzelis olundu...");
+                            break;
+                        case 2:
+                            Console.WriteLine("Iscinin yeni vezifesini daxil edin: ");
+
+                        reEnternewPosition:
+                            string newPosition = Console.ReadLine();
+                            if (String.IsNullOrWhiteSpace(newPosition))
+                            {
+                                Console.WriteLine("Duzgun daxil edin...");
+                                goto reEnternewPosition;
+                            }
+
+                            item.Position = newPosition;
+                            Console.WriteLine("Vezifede duzelis olundu...");
+                            break;
+                    }
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Daxil etdiyiniz nomrede isci movcud deyil.\n");
+                    return;
+                }
+            
+
+
+
+                //if (item.No.ToLower() == workerNo.ToLower())
+                //{
+                //    Console.WriteLine("Secdiyiniz iscinin adini hansi ada deyismek isteyirsiniz? Daxil edin: ");
+                //reEnterNewName:
+                //    string newName = Console.ReadLine(); // neye deyisecek
+
+                    //    if (String.IsNullOrWhiteSpace(newName))
+                    //    {
+                    //        Console.WriteLine("Duzgun daxil edin:");
+                    //        goto reEnterNewName;
+                    //    }
+
+                    //    item.Name = newName;
+                    //    break;
+                    //}
+                    //Console.WriteLine("Daxil etdiyiniz adda departament movcud deyil. Duzgun daxil edin: ");
+                    //goto reEnterNameNow;
+            }
         }
 
         static void RemoveEmployee(ref HumanResourceManager hrManager)
