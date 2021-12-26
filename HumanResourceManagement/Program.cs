@@ -73,6 +73,12 @@ namespace HumanResourceManagement
 
         static void AddEmployee(ref HumanResourceManager hrManager)
         {
+            if (hrManager.Departments.Length <= 0)
+            {
+                Console.WriteLine("Cari departament bazasi bosdur. Ilk once departament yaratmalisiniz.");
+                return;
+            }
+
             Console.WriteLine("Elave etmek istediyiniz iscinin ad ve soyadini daxil edin: ");
         reEnterFullname:
             string fullname = Console.ReadLine();
@@ -107,8 +113,22 @@ namespace HumanResourceManagement
             string departmentName = Console.ReadLine();
             if (String.IsNullOrWhiteSpace(departmentName))
             {
-                Console.WriteLine("Ad ve soyadi duzgun daxil edin...");
+                Console.WriteLine("Departament adini duzgun daxil edin...");
                 goto reEnterDepartmentName;
+            }
+
+            foreach (Department item in hrManager.Departments)
+            {
+                if (item.Name.ToLower() == departmentName.ToLower())
+                {
+                    Console.Clear();
+                    Console.WriteLine("Isci elave olundu...\n");
+                }
+                else
+                {
+                    Console.WriteLine("Daxil etdiyiniz departament adi yanlisdir. Duzgun daxil edin: ");
+                    goto reEnterDepartmentName;
+                }
             }
 
             hrManager.AddEmployee(fullname, positionName, checkSalary, departmentName);
@@ -223,11 +243,11 @@ namespace HumanResourceManagement
                         goto reEnterNewName;
                     }
 
-                    if (nameNow.ToLower() == newName.ToLower())
-                    {
-                        Console.WriteLine("Deyisdirmek istediyiniz ad cari adla eyni ola bilmez...\nDuzgun daxil edin:");
-                        goto reEnterNewName;
-                    }
+                    //if (nameNow.ToLower() == newName.ToLower())
+                    //{
+                    //    Console.WriteLine("Deyisdirmek istediyiniz ad cari adla eyni ola bilmez...\nDuzgun daxil edin:");
+                    //    goto reEnterNewName;
+                    //}
 
                     item.Name = newName;
                     break;

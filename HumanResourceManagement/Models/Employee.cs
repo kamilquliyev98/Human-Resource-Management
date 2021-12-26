@@ -13,7 +13,7 @@ namespace HumanResourceManagement.Models
         public string Position { get; set; } // min 2 herf
         public double Salary { get; set; } // >= 250
         public string DepartmentName { get; set; }
-        public Employee[] Employees { get; set; }
+        //public Employee[] Employees { get; set; }
 
         public Employee()
         {
