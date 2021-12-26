@@ -26,3 +26,17 @@ C:\Users\User\source\repos\Human-Resource-Management\HumanResourceManagement\obj
 C:\Users\User\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.dll
 C:\Users\User\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.pdb
 C:\Users\User\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.genruntimeconfig.cache
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\bin\Debug\netcoreapp3.1\HumanResourceManagement.exe
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\bin\Debug\netcoreapp3.1\HumanResourceManagement.deps.json
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\bin\Debug\netcoreapp3.1\HumanResourceManagement.runtimeconfig.json
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\bin\Debug\netcoreapp3.1\HumanResourceManagement.runtimeconfig.dev.json
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\bin\Debug\netcoreapp3.1\HumanResourceManagement.dll
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\bin\Debug\netcoreapp3.1\HumanResourceManagement.pdb
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.csproj.AssemblyReference.cache
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.AssemblyInfoInputs.cache
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.AssemblyInfo.cs
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.csproj.CoreCompileInputs.cache
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.dll
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.pdb
+C:\Users\Kamil\source\repos\Human-Resource-Management\HumanResourceManagement\obj\Debug\netcoreapp3.1\HumanResourceManagement.genruntimeconfig.cache

@@ -29,5 +29,10 @@ namespace HumanResourceManagement.Models
             WorkerLimit = workerLimit;
             SalaryLimit = salaryLimit;
         }
+
+        public override string ToString()
+        {
+            return $"Departanent adi: {Name}\nIsci sayi limiti: {WorkerLimit}\nIsci maasi limiti: {SalaryLimit}\n";
+        }
     }
 }

@@ -152,9 +152,9 @@ namespace HumanResourceManagement
         {
             if (hrManager.Departments.Length > 0)
             {
-                foreach (var item in hrManager.Departments)
+                foreach (Department item in hrManager.Departments)
                 {
-                    Console.WriteLine($"{item}");
+                    Console.WriteLine($"{item}\n");
                 }
             }
             else
