@@ -44,11 +44,11 @@ namespace HumanResourceManagement
                         break;
                     case 4:
                         Console.Clear();
-                        GetDepartmentsList(ref hrManager);
+                        GetEmployeeList(ref hrManager);
                         break;
                     case 5:
                         Console.Clear();
-                        GetDepartmentsList(ref hrManager); // By Department
+                        GetEmployeeListByDepartmentName(ref hrManager);
                         break;
                     case 6:
                         Console.Clear();
@@ -146,6 +146,27 @@ namespace HumanResourceManagement
             }
 
             hrManager.AddDepartment(departmentname, workersNum, salaryNum);
+        }
+
+        static void GetEmployeeList(ref HumanResourceManager hrManager)
+        {
+            if (hrManager.Employees.Length > 0)
+            {
+                foreach (Employee item in hrManager.Employees)
+                {
+                    Console.WriteLine($"{item}\n");
+                }
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Isci movcud deyil. Ilk once isci elave edin.");
+            }
+        }
+
+        static void GetEmployeeListByDepartmentName(ref HumanResourceManager hrManager)
+        {
+
         }
 
         static void GetDepartmentsList(ref HumanResourceManager hrManager)

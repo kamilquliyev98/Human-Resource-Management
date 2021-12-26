@@ -20,11 +20,7 @@ namespace HumanResourceManagement.Services
             _departments = new Department[0];
         }
 
-        public Department[] GetDepartmentsList(Department[] departments)
-        {
-            throw new NotImplementedException();
-        } // sil
-
+        
         public void AddDepartment(string name, int workerLimit, double salaryLimit)
         {
             Department department = new Department(name, workerLimit, salaryLimit);
@@ -37,16 +33,16 @@ namespace HumanResourceManagement.Services
             throw new NotImplementedException();
         }
 
-        public Department[] GetEmployeeListByDepartmentName()
+        public Employee[] GetEmployeeListByDepartmentName()
         {
             throw new NotImplementedException();
         }
 
         public void AddEmployee(string fullname, string position, double salary, string departmentName)
         {
-            Employee emp = new Employee(fullname, position, salary, departmentName);
+            Employee employee = new Employee(fullname, position, salary, departmentName);
             Array.Resize(ref _employees, _employees.Length + 1);
-            _employees[_employees.Length - 1] = emp;
+            _employees[_employees.Length - 1] = employee;
         }
 
         public void EditEmployee(string no, string fullname, double salary, string position)
@@ -55,6 +51,11 @@ namespace HumanResourceManagement.Services
         }
 
         public void RemoveEmployee(string no, string departmentName)
+        {
+            throw new NotImplementedException();
+        }
+
+        Department[] IHumanResourceManager.GetEmployeeListByDepartmentName()
         {
             throw new NotImplementedException();
         }
