@@ -201,7 +201,30 @@ namespace HumanResourceManagement
 
         static void GetEmployeeListByDepartmentName(ref HumanResourceManager hrManager)
         {
+            if (hrManager.Departments.Length <= 0)
+            {
+                Console.WriteLine("Hec bir departament movcud deyil...\n");
+                return;
+            }
 
+            if (hrManager.Employees.Length <= 0)
+            {
+                Console.WriteLine("Hec bir isci movcud deyil...\n");
+                return;
+            }
+
+            Console.WriteLine("Hansi departamentdeki iscilere baxmaq isteyirsiniz?");
+            Console.Write("Departament adini daxil edin: ");
+
+            reEnterDpName:
+            string dpname = Console.ReadLine();
+            if (String.IsNullOrWhiteSpace(dpname))
+            {
+                Console.WriteLine("Duzgun daxil edin: ");
+                goto reEnterDpName;
+            }
+
+            hrManager.GetEmployeeListByDepartmentName(dpname);
         }
 
         static void GetDepartmentsList(ref HumanResourceManager hrManager)
@@ -244,32 +267,34 @@ namespace HumanResourceManagement
                 goto reEnterNameNow;
             }
 
+            bool checker = true;
             foreach (Department item in hrManager.Departments)
             {
                 if (item.Name.ToLower() == nameNow.ToLower())
                 {
                     Console.WriteLine("Secdiyiniz departament adini hansi ada deyismek isteyirsiniz? Daxil edin: ");
-                reEnterNewName:
-                    string newName = Console.ReadLine();
-
-                    if (String.IsNullOrWhiteSpace(newName) || newName.Length < 2)
-                    {
-                        Console.WriteLine("Duzgun daxil edin:");
-                        goto reEnterNewName;
-                    }
-
-                    //if (nameNow.ToLower() == newName.ToLower())
-                    //{
-                    //    Console.WriteLine("Deyisdirmek istediyiniz ad cari adla eyni ola bilmez...\nDuzgun daxil edin:");
-                    //    goto reEnterNewName;
-                    //}
-
-                    item.Name = newName;
+                    checker = false;
                     break;
                 }
-                Console.WriteLine("Daxil etdiyiniz adda departament movcud deyil. Duzgun daxil edin: ");
+            }
+
+            if (checker)
+            {
+                Console.WriteLine("Daxil etdiyiniz adda departament movcud deyil. Duzgun daxil edin:");
                 goto reEnterNameNow;
             }
+            
+
+        reEnterNewName:
+            string newName = Console.ReadLine();
+
+            if (String.IsNullOrWhiteSpace(newName) || newName.Length < 2)
+            {
+                Console.WriteLine("Duzgun daxil edin:");
+                goto reEnterNewName;
+            }
+
+            hrManager.EditDepartment(nameNow, newName);
         }
 
         static void EditEmployee(ref HumanResourceManager hrManager)

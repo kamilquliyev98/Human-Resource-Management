@@ -30,23 +30,36 @@ namespace HumanResourceManagement.Services
 
         public void EditDepartment(string name, string newName)
         {
-            Department department = null;
-
+            bool checker = true;
             foreach (Department item in _departments)
             {
-                if (item.Name == name)
+                if (item.Name.ToLower() == name.ToLower())
                 {
-                    department = item;
+                    item.Name = newName;
+                    Console.Clear();
+                    Console.WriteLine("Departament adinda deyisiklik edildi.\n");
+                    checker = false;
                     break;
                 }
             }
 
-            department.Name = newName;
+            if (checker)
+            {
+                Console.WriteLine("Daxil etdiyiniz adda departament movcud deyil.");
+                return;
+            }
         } // done
 
-        public Employee[] GetEmployeeListByDepartmentName(string name)
+        public void GetEmployeeListByDepartmentName(string dpname)
         {
-            throw new NotImplementedException();
+            foreach (Employee item in _employees)
+            {
+                if (item.DepartmentName.ToLower() == dpname.ToLower())
+                {
+                    Console.WriteLine(item);
+                    Console.WriteLine("------------------------------");
+                }
+            }
         }
 
         public void AddEmployee(string fullname, string position, double salary, string departmentName)
@@ -75,11 +88,6 @@ namespace HumanResourceManagement.Services
         } // done
 
         public void RemoveEmployee(string no, string departmentName)
-        {
-            throw new NotImplementedException();
-        }
-
-        Department[] IHumanResourceManager.GetEmployeeListByDepartmentName()
         {
             throw new NotImplementedException();
         }
