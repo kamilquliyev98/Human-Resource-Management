@@ -7,7 +7,7 @@ namespace HumanResourceManagement.Models
     class Department
     {
         public string Name { get; set; } // min 2 herf
-        public int WorkerLimit { get; set; } // min 1 nefer
+        public int? WorkerLimit { get; set; } // min 1 nefer
         public double SalaryLimit { get; set; } // >= 250
         private Employee[] Employees;
         public double CalcSalaryAverage(Department department)
