@@ -20,20 +20,31 @@ namespace HumanResourceManagement.Services
             _departments = new Department[0];
         }
 
-        
+
         public void AddDepartment(string name, int workerLimit, double salaryLimit)
         {
             Department department = new Department(name, workerLimit, salaryLimit);
             Array.Resize(ref _departments, _departments.Length + 1);
             _departments[_departments.Length - 1] = department;
-        }
+        } // done
 
         public void EditDepartment(string name, string newName)
         {
-            throw new NotImplementedException();
-        }
+            Department department = null;
 
-        public Employee[] GetEmployeeListByDepartmentName()
+            foreach (Department item in _departments)
+            {
+                if (item.Name == name)
+                {
+                    department = item;
+                    break;
+                }
+            }
+
+            department.Name = newName;
+        } // done
+
+        public Employee[] GetEmployeeListByDepartmentName(string name)
         {
             throw new NotImplementedException();
         }
@@ -43,12 +54,25 @@ namespace HumanResourceManagement.Services
             Employee employee = new Employee(fullname, position, salary, departmentName);
             Array.Resize(ref _employees, _employees.Length + 1);
             _employees[_employees.Length - 1] = employee;
-        }
+        } // done
 
         public void EditEmployee(string no, string fullname, double salary, string position)
         {
-            throw new NotImplementedException();
-        }
+            Employee employee = null;
+
+            foreach (Employee item in _employees)
+            {
+                if (item.No == no)
+                {
+                    employee = item;
+                    break;
+                }
+
+                employee.Fullname = fullname;
+                employee.Salary = salary;
+                employee.Position = position;
+            }
+        } // done
 
         public void RemoveEmployee(string no, string departmentName)
         {
