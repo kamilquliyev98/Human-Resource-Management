@@ -7,13 +7,12 @@ namespace HumanResourceManagement.Interfaces
 {
     interface IHumanResourceManager
     {
-        Employee[] Employees { get; }
-        Department[] Departments { get; }
-
+        public Department[] Departments { get; }
         void AddDepartment(string name, int workerLimit, double salaryLimit);
+        Department[] GetDepartments();
+        void EditDepartament(string name, string newName);
         void AddEmployee(string fullname, string position, double salary, string departmentName);
-        void EditDepartment(string name, string newName);
-        void EditEmployee(string no, /*string fullname,*/ double salary, string position);
-        void GetEmployeeListByDepartmentName(string dpname);
+        void RemoveEmployee(string employeeNo, string departmentName);
+        void EditEmployee(string employeeNo, string fullname, string position, double salary);
     }
 }
