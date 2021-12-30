@@ -70,7 +70,7 @@ namespace HumanResourceManagement.Models
 
         public override string ToString()
         {
-            return $"Ad soyad: {Fullname}\nVezife: {Position}\nMaas: {Salary}\nDepartament adi: {DepartmentName}\nIscinin nomresi: {No}";
+            return $"Ad soyad: {Fullname}\nVezife: {Position}\nMaas: {Salary} AZN\nDepartament adi: {DepartmentName}\nIscinin nomresi: {No}";
         }
     }
 }

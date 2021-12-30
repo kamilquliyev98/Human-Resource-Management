@@ -92,6 +92,21 @@ namespace HumanResourceManagement.Models
             return total;
         }
 
+        public double SalaryCounter()
+        {
+            double salaryNow = 0;
+
+            foreach (Employee item in Employees)
+            {
+                if (item != null)
+                {
+                    salaryNow += item.Salary;
+                }
+            }
+
+            return salaryNow;
+        }
+
         public Department(string name, int workerLimit, double salaryLimit)
         {
             Name = name;
@@ -103,7 +118,7 @@ namespace HumanResourceManagement.Models
 
         public override string ToString()
         {
-            return $"Departament adi: {Name}\nIsci sayi limiti: Max {WorkerLimit} nefer\nFaktiki isci sayi: {WorkerCounter()} nefer\nIscilerin maas limiti (cemi): Max {SalaryLimit} AZN / ay\nIscilerin maas ortalamasi: {CalcSalaryAverage()}";
+            return $"Departament adi: {Name}\nIsci sayi limiti: Max {WorkerLimit} nefer\nFaktiki isci sayi: {WorkerCounter()} nefer\nIscilerin maas limiti (cemi): Max {SalaryLimit} AZN / ay\nIscilerin maas ortalamasi: {CalcSalaryAverage()} AZN";
         }
     }
 }

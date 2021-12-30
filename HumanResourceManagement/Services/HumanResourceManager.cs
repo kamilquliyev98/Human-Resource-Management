@@ -39,11 +39,17 @@ namespace HumanResourceManagement.Services
 
         public void EditDepartament(string name, string newName)
         {
-            foreach (Department item in _departments)
+            foreach (Department department in _departments)
             {
-                if (item.Name.ToLower() == name.ToLower())
+                if (department.Name.ToLower() == name.ToLower())
                 {
-                    item.Name = newName;
+                    foreach (Employee employee in department.Employees)
+                    {
+                        employee.DepartmentName = newName;
+                        employee.No = employee.No.Remove(0, 2);
+                        employee.No = employee.DepartmentName.ToUpper().Substring(0, 2) + employee.No;
+                    }
+                    department.Name = newName;
                     break;
                 }
             }
