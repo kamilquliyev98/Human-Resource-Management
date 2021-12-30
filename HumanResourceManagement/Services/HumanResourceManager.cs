@@ -51,16 +51,25 @@ namespace HumanResourceManagement.Services
 
         public void EditEmployee(string employeeNo, string fullname, string position, double salary)
         {
-            //foreach (Department department in _departments)
-            //{
-            //    foreach (Employee employee in department.Employees)
-            //    {
-            //        if (department.Employees.Length > 0)
-            //        {
-            //            Console.WriteLine(employee);
-            //        }
-            //    }
-            //}
+            foreach (Department department in _departments)
+            {
+                foreach (Employee employee in department.Employees)
+                {
+                    if ((employee.No.ToLower() == employeeNo.ToLower()) && (employee.Fullname.ToLower() == fullname.ToLower()))
+                    {
+                        if (position != null)
+                        {
+                            employee.Position = position;
+                        }
+
+                        if (salary != 0 && salary >= 250)
+                        {
+                            employee.Salary = salary;
+                        }
+                        break;
+                    }
+                }
+            }
         }
 
         public Department[] GetDepartments()
