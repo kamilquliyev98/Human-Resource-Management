@@ -89,7 +89,7 @@ namespace HumanResourceManagement.Services
 
         public void RemoveEmployee(string employeeNo, string departmentName)
         {
-            throw new NotImplementedException();
+            
         }
 
     }
