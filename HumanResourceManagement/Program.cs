@@ -277,10 +277,15 @@ namespace HumanResourceManagement
                 if (item.Name.ToLower() == nameNow.ToLower())
                 {
                     checker = false;
-                    Console.WriteLine("Secdiyiniz departament adini hansi ada deyismek isteyirsiniz? Daxil edin:");
+                    Console.WriteLine("\nSecdiyiniz departament adini hansi ada deyismek isteyirsiniz? Daxil edin:");
                 reEnterNewName:
                     Console.Write("=> ");
                     newName = Console.ReadLine();
+                    if (String.IsNullOrWhiteSpace(newName) || newName.Length < 2)
+                    {
+                        Console.WriteLine("Duzgun daxil edin:");
+                        goto reEnterNewName;
+                    }
 
                     foreach (Department item2 in hrManager.Departments)
                     {
@@ -290,12 +295,6 @@ namespace HumanResourceManagement
                             Console.WriteLine($"\"{newName}\" adli departament artiq movcuddur. Iki eyni adda departament ola bilmez...\n");
                             return;
                         }
-                    }
-
-                    if (String.IsNullOrWhiteSpace(newName) || newName.Length < 2)
-                    {
-                        Console.WriteLine("Duzgun daxil edin:");
-                        goto reEnterNewName;
                     }
 
                     Console.Clear();
@@ -318,9 +317,12 @@ namespace HumanResourceManagement
             int countWorker = 0;
             foreach (Department department in hrManager.Departments)
             {
-                if (department.Employees.Length > 0)
+                foreach (Employee employee in department.Employees)
                 {
-                    countWorker++;
+                    if (employee != null)
+                    {
+                        countWorker++;
+                    }
                 }
             }
 
@@ -376,7 +378,15 @@ namespace HumanResourceManagement
                 if (department.Name.ToLower() == dpname.ToLower())
                 {
                     Console.Clear();
-                    if (department.Employees.Length <= 0)
+                    int cntworker = 0;
+                    foreach (Employee employee in department.Employees)
+                    {
+                        if (employee != null)
+                        {
+                            cntworker++;
+                        }
+                    }
+                    if (cntworker == 0)
                     {
                         Console.WriteLine("Secilmis departamentde isci movcud deyil...\n");
                         return;
@@ -406,9 +416,12 @@ namespace HumanResourceManagement
             int countWorker = 0;
             foreach (Department department in hrManager.Departments)
             {
-                if (department.Employees.Length > 0)
+                foreach (Employee employee in department.Employees)
                 {
-                    countWorker++;
+                    if (employee != null)
+                    {
+                        countWorker++;
+                    }
                 }
             }
 
@@ -442,7 +455,7 @@ namespace HumanResourceManagement
                 goto reEnterWorkerNo;
             }
 
-            Console.WriteLine("Deyisiklik etmek istediyiniz iscinin tam adini daxil edin:");
+            Console.WriteLine("\nDeyisiklik etmek istediyiniz iscinin tam adini daxil edin:");
         reEnterFullname:
             Console.Write("=> ");
             string fullname = Console.ReadLine();
@@ -461,102 +474,104 @@ namespace HumanResourceManagement
             {
                 foreach (Employee employee in department.Employees)
                 {
-                    if ((employee.No.ToLower() == workerNo.ToLower()) && (employee.Fullname.ToLower() == fullname.ToLower()))
+                    if (employee != null)
                     {
-                        Console.Clear();
-                        Console.WriteLine(employee);
-
-                        Console.WriteLine("\nIsci uzerinde etmek istediyiniz emeliyyatin qarsisindaki nomreni daxil edin:\n");
-                        Console.WriteLine("\t1 - Iscinin aldigi maasda duzelis etmek");
-                        Console.WriteLine("\t2 - Iscinin vezifesinde duzelis etmek");
-                        Console.WriteLine("\t3 - Hem iscinin aldigi maasda, hem de vezifesinde duzelis etmek");
-
-                    reEnterEditWorker:
-                        Console.Write("=> ");
-                        string select = Console.ReadLine();
-                        int selectNum;
-                        if (!int.TryParse(select, out selectNum))
+                        if ((employee.No.ToLower() == workerNo.ToLower()) && (employee.Fullname.ToLower() == fullname.ToLower()))
                         {
-                            Console.WriteLine("Duzgun daxil edin...");
-                            goto reEnterEditWorker;
-                        }
+                            Console.Clear();
+                            Console.WriteLine(employee);
 
-                        switch (selectNum)
-                        {
-                            case 1:
-                                Console.WriteLine("\nIscinin yeni maasini daxil edin:");
-                            reEnterNewSalary:
-                                Console.Write("=> ");
-                                newSalary = Console.ReadLine();
-                                if (!double.TryParse(newSalary, out newSalaryNum) || newSalaryNum < 250)
-                                {
-                                    Console.WriteLine("Duzgun daxil edin...");
-                                    goto reEnterNewSalary;
-                                }
+                            Console.WriteLine("\nIsci uzerinde etmek istediyiniz emeliyyatin qarsisindaki nomreni daxil edin:\n");
+                            Console.WriteLine("\t1 - Iscinin aldigi maasda duzelis etmek");
+                            Console.WriteLine("\t2 - Iscinin vezifesinde duzelis etmek");
+                            Console.WriteLine("\t3 - Hem iscinin aldigi maasda, hem de vezifesinde duzelis etmek");
 
-                                //while (department.SalaryLimit < department.SalaryCounter() + newSalaryNum)
-                                //{
-                                //    Console.WriteLine($"\n\"{department.Name}\" departamenti ucun nezerde tutulan maas limitini kecmemelisiniz...");
-                                //    Console.WriteLine($"Limit: Max {department.SalaryLimit} AZN");
-                                //    Console.WriteLine($"Departament uzre iscilere verilen cari cemi maas: {department.SalaryCounter()} AZN");
-                                //    Console.Write("Meblegi duzgun daxil edin: ");
-                                //    goto reEnterNewSalary;
-                                //}
-
-                                Console.WriteLine("Maasda duzelis olundu...\n");
-                                break;
-                            case 2:
-                                Console.WriteLine("\nIscinin yeni vezifesini daxil edin:");
-                            reEnternewPosition:
-                                Console.Write("=> ");
-                                newPosition = Console.ReadLine();
-                                if (String.IsNullOrWhiteSpace(newPosition) || newPosition.Length < 2)
-                                {
-                                    Console.WriteLine("Duzgun daxil edin...");
-                                    goto reEnternewPosition;
-                                }
-
-                                Console.WriteLine("Vezifede duzelis olundu...\n");
-                                break;
-                            case 3:
-                                Console.WriteLine("\nIscinin yeni maasini daxil edin:");
-                            reEnternewSalary1:
-                                Console.Write("=> ");
-                                newSalary = Console.ReadLine();
-                                if (!double.TryParse(newSalary, out newSalaryNum) || newSalaryNum < 250)
-                                {
-                                    Console.WriteLine("Duzgun daxil edin...");
-                                    goto reEnternewSalary1;
-                                }
-
-                                //while (department.SalaryLimit < department.SalaryCounter() + newSalaryNum)
-                                //{
-                                //    Console.WriteLine($"\n\"{department.Name}\" departamenti ucun nezerde tutulan maas limitini kecmemelisiniz...");
-                                //    Console.WriteLine($"Limit: Max {department.SalaryLimit} AZN");
-                                //    Console.WriteLine($"Departament uzre iscilere verilen cari cemi maas: {department.SalaryCounter()} AZN");
-                                //    Console.WriteLine($"Hal-hazirda departament uzre yaratdiginiz isciye max {department.SalaryLimit - department.SalaryCounter()} AZN maas vere bilersiniz.\n");
-                                //    Console.Write("Meblegi duzgun daxil edin: ");
-                                //    goto reEnterNewSalary;
-                                //}
-
-                                Console.WriteLine("\nIscinin yeni vezifesini daxil edin:");
-                            reEnternewPosition2:
-                                Console.Write("=> ");
-                                newPosition = Console.ReadLine();
-                                if (String.IsNullOrWhiteSpace(newPosition) || newPosition.Length < 2)
-                                {
-                                    Console.WriteLine("Duzgun daxil edin...");
-                                    goto reEnternewPosition2;
-                                }
-
-                                Console.WriteLine("Secdiyiniz iscinin hem vezifesinde, hem de aldigi maasda duzelis etdiniz...\n");
-                                break;
-                            default:
-                                Console.WriteLine("Nomreni duzgun daxil edin:");
+                        reEnterEditWorker:
+                            Console.Write("=> ");
+                            string select = Console.ReadLine();
+                            int selectNum;
+                            if (!int.TryParse(select, out selectNum))
+                            {
+                                Console.WriteLine("Duzgun daxil edin...");
                                 goto reEnterEditWorker;
+                            }
+
+                            switch (selectNum)
+                            {
+                                case 1:
+                                    Console.WriteLine("\nIscinin yeni maasini daxil edin:");
+                                reEnterNewSalary:
+                                    Console.Write("=> ");
+                                    newSalary = Console.ReadLine();
+                                    if (!double.TryParse(newSalary, out newSalaryNum) || newSalaryNum < 250)
+                                    {
+                                        Console.WriteLine("Duzgun daxil edin...");
+                                        goto reEnterNewSalary;
+                                    }
+
+                                    while (department.SalaryLimit < department.SalaryCounter() - employee.Salary + newSalaryNum)
+                                    {
+                                        Console.WriteLine($"\n\"{department.Name}\" departamenti ucun nezerde tutulan maas limitini kecmemelisiniz...");
+                                        Console.WriteLine($"Limit: Max {department.SalaryLimit} AZN");
+                                        Console.WriteLine($"Duzelis etdiyiniz isciye max {department.SalaryLimit - (department.SalaryCounter() - employee.Salary)} AZN maas vere bilersiniz...");
+                                        Console.Write("Meblegi duzgun daxil edin: ");
+                                        goto reEnterNewSalary;
+                                    }
+
+                                    Console.WriteLine("Maasda duzelis olundu...\n");
+                                    break;
+                                case 2:
+                                    Console.WriteLine("\nIscinin yeni vezifesini daxil edin:");
+                                reEnternewPosition:
+                                    Console.Write("=> ");
+                                    newPosition = Console.ReadLine();
+                                    if (String.IsNullOrWhiteSpace(newPosition) || newPosition.Length < 2)
+                                    {
+                                        Console.WriteLine("Duzgun daxil edin...");
+                                        goto reEnternewPosition;
+                                    }
+
+                                    Console.WriteLine("Vezifede duzelis olundu...\n");
+                                    break;
+                                case 3:
+                                    Console.WriteLine("\nIscinin yeni maasini daxil edin:");
+                                reEnterNewSalary1:
+                                    Console.Write("=> ");
+                                    newSalary = Console.ReadLine();
+                                    if (!double.TryParse(newSalary, out newSalaryNum) || newSalaryNum < 250)
+                                    {
+                                        Console.WriteLine("Duzgun daxil edin...");
+                                        goto reEnterNewSalary1;
+                                    }
+
+                                    while (department.SalaryLimit < department.SalaryCounter() - employee.Salary + newSalaryNum)
+                                    {
+                                        Console.WriteLine($"\n\"{department.Name}\" departamenti ucun nezerde tutulan maas limitini kecmemelisiniz...");
+                                        Console.WriteLine($"Limit: Max {department.SalaryLimit} AZN");
+                                        Console.WriteLine($"Duzelis etdiyiniz isciye max {department.SalaryLimit - (department.SalaryCounter() - employee.Salary)} AZN maas vere bilersiniz...");
+                                        Console.Write("Meblegi duzgun daxil edin: ");
+                                        goto reEnterNewSalary1;
+                                    }
+
+                                    Console.WriteLine("\nIscinin yeni vezifesini daxil edin:");
+                                reEnternewPosition2:
+                                    Console.Write("=> ");
+                                    newPosition = Console.ReadLine();
+                                    if (String.IsNullOrWhiteSpace(newPosition) || newPosition.Length < 2)
+                                    {
+                                        Console.WriteLine("Duzgun daxil edin...");
+                                        goto reEnternewPosition2;
+                                    }
+
+                                    Console.WriteLine("Secdiyiniz iscinin hem vezifesinde, hem de aldigi maasda duzelis etdiniz...\n");
+                                    break;
+                                default:
+                                    Console.WriteLine("Nomreni duzgun daxil edin:");
+                                    goto reEnterEditWorker;
+                            }
+                            checker = false;
+                            break;
                         }
-                        checker = false;
-                        break;
                     }
                 }
             }
@@ -573,18 +588,18 @@ namespace HumanResourceManagement
 
         static void RemoveEmployee(ref HumanResourceManager hrManager)
         {
-            int countWorker = 0;
+            int countDep = 0;
             foreach (Department department in hrManager.Departments)
             {
                 if (department.Employees.Length > 0)
                 {
-                    countWorker++;
+                    countDep++;
                 }
             }
 
-            if (countWorker == 0)
+            if (countDep == 0)
             {
-                Console.WriteLine("Hec bir isci movcud deyil. Emeliyyati icra etmek ucun hec olmasa 1 nefer isci olmalidir.\n");
+                Console.WriteLine("Hec bir departament ve hec bir isci movcud deyil. Emeliyyati icra etmek ucun hec olmasa 1 departament ve 1 nefer isci olmalidir.\n");
                 return;
             }
 
@@ -611,15 +626,23 @@ namespace HumanResourceManagement
             {
                 if (department.Name.ToLower() == selectDepartment.ToLower())
                 {
-                    if (department.Employees.Length <= 0)
+                    int cntworker = 0;
+                    foreach (Employee employee in department.Employees)
+                    {
+                        if (employee != null)
+                        {
+                            cntworker++;
+                        }
+                    }
+                    if (cntworker == 0)
                     {
                         Console.Clear();
-                        Console.WriteLine("Secilmis departamentde isci yoxdur...\n");
+                        Console.WriteLine($"\n\"{department.Name}\" departamentinde isci yoxdur...\n");
                         return;
                     }
 
                     Console.Clear();
-                    Console.WriteLine($"{department.Name} departamentindeki iscilerin siyahisi:\n");
+                    Console.WriteLine($"\"{department.Name}\" departamentindeki iscilerin siyahisi:\n");
                     Console.WriteLine("------------------------------------------");
                     foreach (Employee employee in department.Employees)
                     {
@@ -642,11 +665,14 @@ namespace HumanResourceManagement
                     bool deleted = false;
                     for (int i = 0; i < department.Employees.Length; i++)
                     {
-                        if (department.Employees[i].No.ToLower() == DelWorker.ToLower())
+                        if (department.Employees[i] != null)
                         {
-                            department.Employees[i] = null;
-                            deleted = true;
-                            break;
+                            if (department.Employees[i].No.ToLower() == DelWorker.ToLower())
+                            {
+                                department.Employees[i] = null;
+                                deleted = true;
+                                break;
+                            }
                         }
                     }
 

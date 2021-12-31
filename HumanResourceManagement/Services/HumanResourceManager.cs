@@ -43,13 +43,15 @@ namespace HumanResourceManagement.Services
             {
                 if (department.Name.ToLower() == name.ToLower())
                 {
+                    department.Name = newName;
                     foreach (Employee employee in department.Employees)
                     {
-                        employee.DepartmentName = newName;
-                        employee.No = employee.No.Remove(0, 2);
-                        employee.No = employee.DepartmentName.ToUpper().Substring(0, 2) + employee.No;
+                        if (employee != null)
+                        {
+                            employee.DepartmentName = newName;
+                            employee.No = employee.DepartmentName.ToUpper().Substring(0, 2) + employee.No.Remove(0, 2);
+                        }
                     }
-                    department.Name = newName;
                     break;
                 }
             }
@@ -61,18 +63,21 @@ namespace HumanResourceManagement.Services
             {
                 foreach (Employee employee in department.Employees)
                 {
-                    if ((employee.No.ToLower() == employeeNo.ToLower()) && (employee.Fullname.ToLower() == fullname.ToLower()))
+                    if (employee != null)
                     {
-                        if (position != null)
+                        if ((employee.No.ToLower() == employeeNo.ToLower()) && (employee.Fullname.ToLower() == fullname.ToLower()))
                         {
-                            employee.Position = position;
-                        }
+                            if (position != null)
+                            {
+                                employee.Position = position;
+                            }
 
-                        if (salary != 0 && salary >= 250)
-                        {
-                            employee.Salary = salary;
+                            if (salary != 0 && salary >= 250)
+                            {
+                                employee.Salary = salary;
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }
