@@ -446,9 +446,9 @@ namespace HumanResourceManagement
             }
 
 
-            string newSalary = string.Empty;
+            string newSalary = null;
             double newSalaryNum = 0;
-            string newPosition = string.Empty;
+            string newPosition = null;
             bool checker = true;
             foreach (Department department in hrManager.Departments)
             {
@@ -487,14 +487,14 @@ namespace HumanResourceManagement
                                     goto reEnterNewSalary;
                                 }
 
-                                //while (department.SalaryLimit < department.SalaryCounter() + newSalaryNum)
-                                //{
-                                //    Console.WriteLine($"\n\"{department.Name}\" departamenti ucun nezerde tutulan maas limitini kecmemelisiniz...");
-                                //    Console.WriteLine($"Limit: Max {department.SalaryLimit} AZN");
-                                //    Console.WriteLine($"Departament uzre iscilere verilen cari cemi maas: {department.SalaryCounter()} AZN");
-                                //    Console.Write("Meblegi duzgun daxil edin: ");
-                                //    goto reEnterNewSalary;
-                                //}
+                                while (department.SalaryLimit < department.SalaryCounter() + newSalaryNum)
+                                {
+                                    Console.WriteLine($"\n\"{department.Name}\" departamenti ucun nezerde tutulan maas limitini kecmemelisiniz...");
+                                    Console.WriteLine($"Limit: Max {department.SalaryLimit} AZN");
+                                    Console.WriteLine($"Departament uzre iscilere verilen cari cemi maas: {department.SalaryCounter()} AZN");
+                                    Console.Write("Meblegi duzgun daxil edin: ");
+                                    goto reEnterNewSalary;
+                                }
 
                                 Console.WriteLine("Maasda duzelis olundu...\n");
                                 break;
