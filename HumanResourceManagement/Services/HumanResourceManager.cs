@@ -94,7 +94,20 @@ namespace HumanResourceManagement.Services
 
         public void RemoveEmployee(string employeeNo, string departmentName)
         {
-            
+            foreach (Department department in _departments)
+            {
+                for (int i = 0; i < department.Employees.Length; i++)
+                {
+                    if (department.Employees[i] != null)
+                    {
+                        if (department.Employees[i].No.ToLower() == employeeNo.ToLower() && employeeNo.Length >= 6)
+                        {
+                            department.Employees[i] = null;
+                            break;
+                        }
+                    }
+                }
+            }
         }
 
     }

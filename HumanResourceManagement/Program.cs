@@ -144,6 +144,7 @@ namespace HumanResourceManagement
                 if (item.Name.ToLower() == departmentName.ToLower())
                 {
                     check = true;
+                    departmentName = item.Name;
 
                     if (item.WorkerLimit <= item.WorkerCounter())
                     {
@@ -287,6 +288,13 @@ namespace HumanResourceManagement
                         goto reEnterNewName;
                     }
 
+                    if (nameNow.ToLower() == newName.ToLower())
+                    {
+                        Console.WriteLine("\nYeni ad evvelki adla eyni ola bilmez...");
+                        Console.WriteLine("Duzgun daxil edin:");
+                        goto reEnterNewName;
+                    }
+
                     foreach (Department item2 in hrManager.Departments)
                     {
                         if (item2.Name.ToLower() == newName.ToLower())
@@ -407,7 +415,9 @@ namespace HumanResourceManagement
 
             if (check)
             {
+                Console.Clear();
                 Console.WriteLine("Daxil etdiyiniz adda departament movcud deyil...\n");
+                return;
             }
         }
 
@@ -588,18 +598,18 @@ namespace HumanResourceManagement
 
         static void RemoveEmployee(ref HumanResourceManager hrManager)
         {
-            int countDep = 0;
+            int counter = 0;
             foreach (Department department in hrManager.Departments)
             {
                 if (department.Employees.Length > 0)
                 {
-                    countDep++;
+                    counter++;
                 }
             }
 
-            if (countDep == 0)
+            if (counter == 0)
             {
-                Console.WriteLine("Hec bir departament ve hec bir isci movcud deyil. Emeliyyati icra etmek ucun hec olmasa 1 departament ve 1 nefer isci olmalidir.\n");
+                Console.WriteLine("Hec bir isci movcud deyil. Emeliyyati icra etmek ucun hec olmasa 1 departament ve 1 nefer isci olmalidir.\n");
                 return;
             }
 
@@ -622,10 +632,12 @@ namespace HumanResourceManagement
             }
 
             string DelWorker = string.Empty;
+            bool find = true;
             foreach (Department department in hrManager.Departments)
             {
                 if (department.Name.ToLower() == selectDepartment.ToLower())
                 {
+                    find = false;
                     int cntworker = 0;
                     foreach (Employee employee in department.Employees)
                     {
@@ -637,7 +649,7 @@ namespace HumanResourceManagement
                     if (cntworker == 0)
                     {
                         Console.Clear();
-                        Console.WriteLine($"\n\"{department.Name}\" departamentinde isci yoxdur...\n");
+                        Console.WriteLine($"\"{department.Name}\" departamentinde isci yoxdur...\n");
                         return;
                     }
 
@@ -669,7 +681,6 @@ namespace HumanResourceManagement
                         {
                             if (department.Employees[i].No.ToLower() == DelWorker.ToLower())
                             {
-                                department.Employees[i] = null;
                                 deleted = true;
                                 break;
                             }
@@ -691,6 +702,13 @@ namespace HumanResourceManagement
 
                     break;
                 }
+            }
+
+            if (find)
+            {
+                Console.Clear();
+                Console.WriteLine("Daxil etdiyiniz adda departament yoxdur...\n");
+                return;
             }
 
             hrManager.RemoveEmployee(DelWorker, selectDepartment);
