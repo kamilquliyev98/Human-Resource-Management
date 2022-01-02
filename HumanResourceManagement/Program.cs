@@ -114,6 +114,19 @@ namespace HumanResourceManagement
                 goto reEnterSalaryLimit;
             }
 
+            if (salaryNum / workersNum < 250)
+            {
+                Console.WriteLine($"\nBir nefer isciye minimum 250 AZN maas vere bilersiniz. {workersNum} nefer isci ucun max maas limiti {salaryNum} AZN teskil ede bilmez.");
+                Console.WriteLine($"Minimum teyin ede bileceyiniz maas: {workersNum * 250} AZN\n");
+
+                Console.WriteLine("Isci sayi limitini ve maas limitini duzgun teyin edin:");
+                Console.WriteLine("Isci sayi:");
+                goto reEnterWorkerLimit;
+            }
+
+            Console.Clear();
+            Console.WriteLine("Departament yaradildi...\n");
+
             hrManager.AddDepartment(departmentname, workersNum, salaryNum);
         }
 

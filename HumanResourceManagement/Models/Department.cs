@@ -94,17 +94,19 @@ namespace HumanResourceManagement.Models
 
         public double SalaryCounter()
         {
-            double salaryNow = 0;
+            //double salaryNow = 0;
 
-            foreach (Employee item in Employees)
-            {
-                if (item != null)
-                {
-                    salaryNow += item.Salary;
-                }
-            }
+            //foreach (Employee item in Employees)
+            //{
+            //    if (item != null)
+            //    {
+            //        salaryNow += item.Salary;
+            //    }
+            //}
 
-            return salaryNow;
+            //return salaryNow;
+
+            return CalcSalaryAverage() * WorkerCounter();
         }
 
         public Department(string name, int workerLimit, double salaryLimit)
